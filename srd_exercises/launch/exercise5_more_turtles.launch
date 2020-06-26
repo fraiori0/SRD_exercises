@@ -1,0 +1,26 @@
+<launch>
+    <!-- Turtlesim Node-->
+    <node pkg="turtlesim" type="turtlesim_node" name="sim"/>
+    <node pkg="turtlesim" type="turtle_teleop_key" name="teleop" output="log"/>
+
+    <node pkg="rosservice" type="rosservice" name="create_turtle2" args='call --wait /spawn "{x: 2.0,y: 4.0, theta: 0.0, name: turtle2}" '/>
+    <node pkg="rosservice" type="rosservice" name="create_turtle3" args='call --wait /spawn "{x: 4.0,y: 1.0, theta: 0.0, name: turtle3}" '/>
+    <node pkg="rosservice" type="rosservice" name="create_turtle4" args='call --wait /spawn "{x: 8.0,y: 7.0, theta: 0.0, name: turtle4}" '/>
+    <node pkg="rosservice" type="rosservice" name="create_turtle5" args='call --wait /spawn "{x: 10.0,y: 6.0, theta: 0.0, name: turtle5}" '/>
+    <node pkg="rosservice" type="rosservice" name="create_turtle6" args='call --wait /spawn "{x: 7.0,y: 9.0, theta: 0.0, name: turtle6}" '/>
+
+    <node name="turtle_tf_broadcaster1" pkg="srd_exercises" type="turtle_tf_broadcaster.py" respawn="false" output="screen" >
+      <param name="turtle" type="string" value="turtle1" />
+    </node>
+
+    <node name="turtle_controller1" pkg="srd_exercises" type="turtle_controller.py" respawn="false" output="screen" >
+      <param name="turtlename" type="string" value="turtle1"/>
+      <param name="sat_v" type="double" value="1.0"/>
+      <param name="sat_w" type="double" value="1.0"/>
+    </node>
+
+    <node name="turtle_apf_cmd" pkg="srd_exercises" type="turtle_apf_cmd.py" respawn="false" output="screen" >
+      <param name="turtle_num" type="int" value="6"/>
+    </node>
+    
+</launch>
